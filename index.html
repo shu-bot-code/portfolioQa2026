@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Portfólio de QA Júnior de Wallyson Schumacher com foco em testes manuais, testes de API, documentação de bugs e game testing."
+  />
+  <title>QA Portfolio - Wallyson Schumacher</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --bg-color: #fafafa;
+      --surface: #ffffff;
+      --text-main: #171717;
+      --text-muted: #404040;
+      --text-light: #6b7280;
+      --accent: #2563eb;
+      --accent-soft: #dbeafe;
+      --border-color: #e5e7eb;
+      --border-soft: #f0f0f0;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.06);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --container: 960px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      /* Garante que o scroll não fique embaixo do menu fixo nas âncoras */
+      scroll-padding-top: 140px; 
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    a:hover {
+      color: var(--accent);
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 16px;
+      background: var(--text-main);
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 8px;
+      z-index: 999;
+      font-size: 0.875rem;
+      transition: top 0.2s ease;
+    }
+
+    .skip-link:focus {
+      top: 16px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Alterado de position: fixed para sticky para não sobrepor o conteúdo no carregamento */
+    header {
+      position: sticky;
+      top: 0;
+      background-color: rgba(250, 250, 250, 0.94);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border-color);
+      z-index: 100;
+      padding: 16px 0;
+    }
+
+    .header-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    @media (min-width: 768px) {
+      .header-content {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+
+    .logo {
+      text-align: center;
+    }
+
+    @media (min-width: 768px) {
+      .logo {
+        text-align: left;
+      }
+    }
+
+    .logo h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .logo p {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px 14px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    nav a {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+    }
+    
+    nav a:hover {
+      background-color: var(--border-soft);
+      color: var(--accent);
+    }
+
+    main {
+      /* Padding reduzido pois o header não é mais fixed "flutuando", ele empurra o main naturalmente */
+      padding-top: 80px;
+      padding-bottom: 96px;
+      display: flex;
+      flex-direction: column;
+      gap: 72px;
+      flex: 1;
+    }
+
+    @media (min-width: 768px) {
+      main {
+        padding-top: 100px;
+        gap: 80px;
+      }
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      margin-bottom: 36px;
+      max-width: 640px;
+      font-size: 0.97rem;
+    }
+
+    .sobre-content {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      align-items: flex-start;
+    }
+
+    @media (min-width: 768px) {
+      .sobre-content {
+        flex-direction: row;
+        gap: 36px;
+      }
+    }
+
+    .avatar {
+      width: 96px;
+      height: 96px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: #ededed;
+      border: 1px solid #d8d8d8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--text-light);
+      user-select: none;
+    }
+
+    .sobre-text {
+      max-width: 680px;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      font-size: 1.05rem;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    @media (min-width: 768px) {
+      .skills-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 48px;
+      }
+    }
+
+    .skill-block h3 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 700;
+      color: var(--text-light);
+      margin-bottom: 20px;
+    }
+
+    .skill-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      color: var(--text-main);
+      font-size: 0.96rem;
+    }
+
+    .skill-list li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .skill-list li::before {
+      content: "•";
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+
+    @media (min-width: 768px) {
+      .portfolio-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .card,
+    .bug-card {
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .card {
+      padding: 32px;
+      transition: box-shadow 0.2s ease, transform 0.2s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+
+    .card-tag {
+      display: inline-flex;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 24px;
+    }
+
+    .card-subtitle {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+      color: var(--text-light);
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .card ul {
+      list-style-position: outside;
+      padding-left: 20px;
+      font-size: 0.95rem;
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .artefatos-section {
+      margin-bottom: 56px;
+    }
+
+    .sub-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .sub-title::before {
+      content: "";
+      width: 6px;
+      height: 18px;
+      background-color: var(--accent);
+      border-radius: 999px;
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      background: var(--surface);
+    }
+
+    table {
+      width: 100%;
+      min-width: 680px;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+      background: var(--surface);
+    }
+
+    caption {
+      text-align: left;
+      padding: 16px 20px;
+      font-weight: 600;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    thead th {
+      background-color: #f8f9fa;
+      color: var(--text-muted);
+      font-weight: 600;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    tbody td {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border-soft);
+      color: var(--text-main);
+      vertical-align: top;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr:hover {
+      background-color: #fafbfc;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .badge-green { background: #dcfce7; color: #166534; }
+    .badge-red { background: #fee2e2; color: #b91c1c; }
+    .badge-blue { background: #dbeafe; color: #1d4ed8; }
+    .badge-orange { background: #ffedd5; color: #c2410c; }
+
+    .id-col {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.8rem;
+      color: var(--text-light);
+      white-space: nowrap;
+    }
+
+    .bug-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    @media (min-width: 768px) {
+      .bug-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .bug-card {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .bug-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .bug-title {
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    .bug-body {
+      font-size: 0.9rem;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      flex: 1;
+    }
+
+    .bug-field strong {
+      display: block;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 6px;
+      letter-spacing: 0.08em;
+    }
+
+    .bug-field ol {
+      margin-left: 20px;
+      color: var(--text-muted);
+    }
+
+    .bug-field span {
+      color: var(--text-muted);
+    }
+
+    #contato {
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 56px;
+    }
+
+    .contact-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    @media (min-width: 768px) {
+      .contact-links {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 48px;
+      }
+    }
+
+    .contact-links li span {
+      display: block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+      color: var(--text-light);
+      margin-bottom: 6px;
+    }
+
+    .contact-links li a {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--accent);
+      word-break: break-word;
+    }
+
+    .contact-links li a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      padding: 32px 0 24px;
+      text-align: center;
+      font-size: 0.875rem;
+      color: var(--text-light);
+      margin-top: auto;
+    }
+
+    @media (min-width: 768px) {
+      footer {
+        text-align: left;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 20px;
+      }
+
+      .card,
+      .bug-card {
+        padding: 24px;
+      }
+
+      .section-title {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header>
+    <div class="container header-content">
+      <div class="logo">
+        <h1>Wallyson Schumacher</h1>
+        <p>QA Júnior – Testes manuais, API e jogos</p>
+      </div>
+
+      <nav aria-label="Navegação principal">
+        <ul>
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#habilidades">Habilidades</a></li>
+          <li><a href="#portfolio">Portfólio</a></li>
+          <li><a href="#artefatos">Artefatos</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo" class="container">
+    <section id="sobre" aria-labelledby="titulo-sobre">
+      <h2 id="titulo-sobre" class="section-title">Sobre mim</h2>
+      <div class="sobre-content">
+        <div class="avatar" aria-hidden="true" title="Wallyson Schumacher">WS</div>
+        <div class="sobre-text">
+          <p>
+            Estou em transição para a área de Quality Assurance (QA) após atuar com suporte técnico e validação de funcionalidades, o que me trouxe uma visão prática sobre problemas reais de usuários e a importância de documentação clara.
+          </p>
+          <p>
+            Também desenvolvo projetos experimentais em Unity, o que reforçou meu interesse em qualidade de software voltada para jogos. Atualmente estudo fundamentos de QA, testes manuais estruturados, testes de API e organização de trabalho com Scrum, sempre com foco em clareza, rastreabilidade e melhoria contínua.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="habilidades" aria-labelledby="titulo-habilidades">
+      <h2 id="titulo-habilidades" class="section-title">Habilidades de QA</h2>
+
+      <div class="skills-grid">
+        <div class="skill-block">
+          <h3>Técnicas de teste</h3>
+          <ul class="skill-list">
+            <li>Teste funcional e de regressão</li>
+            <li>Smoke testing e teste exploratório</li>
+            <li>Teste de API com Postman</li>
+            <li>Noções de severidade e prioridade</li>
+            <li>Escrita de casos de teste estruturados</li>
+            <li>Elaboração de bug reports claros e reproduzíveis</li>
+          </ul>
+        </div>
+
+        <div class="skill-block">
+          <h3>Ferramentas & processos</h3>
+          <ul class="skill-list">
+            <li>Postman (requests e collections)</li>
+            <li>Git e GitHub para versionamento</li>
+            <li>Jira e Trello em nível introdutório</li>
+            <li>Unity como contexto de game testing</li>
+            <li>Noções de Scrum e ritos ágeis</li>
+            <li>Ciclo de desenvolvimento e validação de software</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="portfolio" aria-labelledby="titulo-portfolio">
+      <h2 id="titulo-portfolio" class="section-title">Projetos e estudos de caso</h2>
+      <p class="section-desc">
+        Projetos de estudo onde apliquei raciocínio investigativo de QA, documentação de testes e análise de fluxos críticos.
+      </p>
+
+      <div class="portfolio-grid">
+        <article class="card">
+          <h3 class="card-title">Estudo de caso – Jogo 2D em Unity</h3>
+          <div class="card-tag">Game Testing</div>
+
+          <h4 class="card-subtitle">Contexto</h4>
+          <p>
+            Projeto de plataforma 2D no qual foquei na validação de mecânicas de pulo, colisões, fluxo de menus e consistência do HUD de vida ao longo da partida.
+          </p>
+
+          <h4 class="card-subtitle">O que foi testado</h4>
+          <ul>
+            <li>Colisões em bordas e quinas do cenário.</li>
+            <li>Atualização visual do HUD após dano e progresso na fase.</li>
+            <li>Fluxo de reinício de partida após tela de Game Over.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3 class="card-title">Estudo de caso – Aplicação web base</h3>
+          <div class="card-tag">Login e Cadastro</div>
+
+          <h4 class="card-subtitle">Contexto</h4>
+          <p>
+            Aplicação modelo utilizada para validar fluxos principais de cadastro, login e recuperação de senha, com foco em mensagens de erro, validações e limites de campos.
+          </p>
+
+          <h4 class="card-subtitle">O que foi testado</h4>
+          <ul>
+            <li>Caminho feliz de registro, autenticação e recuperação de acesso.</li>
+            <li>Validação de e-mail inválido e comportamento de mensagens em tela.</li>
+            <li>Teste de limites em campos como nome e senha.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3 class="card-title">Integração de API REST</h3>
+          <div class="card-tag">Postman & API Testing</div>
+
+          <h4 class="card-subtitle">Contexto</h4>
+          <p>
+            Análise e validação de rotas backend (APIs) que simulam o fluxo de um e-commerce, testando operações CRUD no carrinho de compras e autenticação.
+          </p>
+
+          <h4 class="card-subtitle">O que foi testado</h4>
+          <ul>
+            <li>Envio de requisições GET, POST, PUT e DELETE.</li>
+            <li>Validação de status codes corretos (200, 201, 400, 401, 404).</li>
+            <li>Asserções de estrutura de payload retornados via JSON.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3 class="card-title">App de Delivery Simulado</h3>
+          <div class="card-tag">Teste Exploratório Mobile</div>
+
+          <h4 class="card-subtitle">Contexto</h4>
+          <p>
+            Execução de testes heurísticos e exploratórios sobre um protótipo de aplicativo móvel focado no acompanhamento de pedidos em tempo real.
+          </p>
+
+          <h4 class="card-subtitle">O que foi testado</h4>
+          <ul>
+            <li>Comportamento do app após interrupções (chamadas/modo avião).</li>
+            <li>Testabilidade em diferentes orientações de tela.</li>
+            <li>Usabilidade da interface de pagamento e clareza de botões.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="artefatos" aria-labelledby="titulo-artefatos">
+      <h2 id="titulo-artefatos" class="section-title">Artefatos de teste</h2>
+      <p class="section-desc">
+        Exemplos criados para demonstrar padrão de documentação, organização de cenários e comunicação de defeitos sem uso de dados sensíveis.
+      </p>
+
+      <div class="artefatos-section">
+        <h3 class="sub-title">Casos de teste</h3>
+
+        <div class="table-responsive">
+          <table>
+            <caption>Exemplos resumidos de casos de teste</caption>
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Título</th>
+                <th scope="col">Tipo de teste</th>
+                <th scope="col">Breve objetivo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="id-col">CT-01</td>
+                <td><strong>Cadastro com sucesso</strong></td>
+                <td><span class="badge badge-green">Funcional</span></td>
+                <td>Validar que o usuário consegue concluir o cadastro no fluxo principal.</td>
+              </tr>
+              <tr>
+                <td class="id-col">CT-02</td>
+                <td><strong>Senha incorreta</strong></td>
+                <td><span class="badge badge-red">Negativo</span></td>
+                <td>Validar que o sistema bloqueia o acesso e exibe mensagem de erro apropriada.</td>
+              </tr>
+              <tr>
+                <td class="id-col">CT-03</td>
+                <td><strong>Limite do campo nome</strong></td>
+                <td><span class="badge badge-blue">Limites</span></td>
+                <td>Validar que o campo nome não aceita envio com mais de 50 caracteres.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="artefatos-section">
+        <h3 class="sub-title">Relatórios de bug</h3>
+
+        <div class="bug-grid">
+          <article class="bug-card">
+            <div class="bug-header">
+              <span class="bug-title">Cadastro aceitando e-mail sem “@”</span>
+              <span class="badge badge-red">Severidade: Alta</span>
+            </div>
+
+            <div class="bug-body">
+              <div class="bug-field">
+                <strong>Contexto</strong>
+                <span>Formulário principal de cadastro da aplicação.</span>
+              </div>
+
+              <div class="bug-field">
+                <strong>Passos para reproduzir</strong>
+                <ol>
+                  <li>Acessar a tela de cadastro.</li>
+                  <li>Preencher nome e senha válidos.</li>
+                  <li>Inserir o e-mail como “usuario.com”.</li>
+                  <li>Clicar em “Registrar”.</li>
+                </ol>
+              </div>
+
+              <div class="bug-field">
+                <strong>Resultado esperado</strong>
+                <span>O sistema deve bloquear o envio e informar que o e-mail é inválido.</span>
+              </div>
+
+              <div class="bug-field">
+                <strong>Resultado atual</strong>
+                <span>O sistema aceita e processa o cadastro com e-mail em formato incorreto.</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="bug-card">
+            <div class="bug-header">
+              <span class="bug-title">HUD de vida não atualiza após receber dano</span>
+              <span class="badge badge-orange">Severidade: Média</span>
+            </div>
+
+            <div class="bug-body">
+              <div class="bug-field">
+                <strong>Contexto</strong>
+                <span>Gameplay padrão durante a fase 2 do jogo.</span>
+              </div>
+
+              <div class="bug-field">
+                <strong>Passos para reproduzir</strong>
+                <ol>
+                  <li>Avançar até a metade da fase 2.</li>
+                  <li>Receber dano no obstáculo “Espinho”.</li>
+                  <li>Observar imediatamente o HUD de vida.</li>
+                </ol>
+              </div>
+
+              <div class="bug-field">
+                <strong>Resultado esperado</strong>
+                <span>A interface deve remover instantaneamente 1 ponto de vida do HUD.</span>
+              </div>
+
+              <div class="bug-field">
+                <strong>Resultado atual</strong>
+                <span>O personagem recebe dano, mas o HUD permanece visualmente inalterado.</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato" aria-labelledby="titulo-contato">
+      <h2 id="titulo-contato" class="section-title">Contato</h2>
+      <p class="section-desc">
+        Estou aberto a oportunidades de QA Júnior e a projetos em que eu possa contribuir com testes, documentação e atenção à experiência do usuário.
+      </p>
+
+      <ul class="contact-links">
+        <li>
+          <span>E-mail</span>
+          <a href="mailto:wallysonschumacherr@gmail.com">Wallysonschumacherr@gmail.com</a>
+        </li>
+        <li>
+          <span>LinkedIn</span>
+          <a
+            href="www.linkedin.com/in/wallyson-schumacher-09a07a16b"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Wallyson Schumacher
+          </a>
+        </li>
+        <li>
+          <span>GitHub</span>
+          <a
+            href="https://github.com/shu-bot-code"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            github.com/shu-bot-code
+          </a>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="container">
+    <p>&copy; 2026 Wallyson Schumacher. Focado em qualidade, clareza e evolução contínua.</p>
+  </footer>
+</body>
+</html>
