@@ -771,6 +771,18 @@
                 <td><span class="badge badge-blue">Limites</span></td>
                 <td>Validar que o campo nome não aceita envio com mais de 50 caracteres.</td>
               </tr>
+              <tr>
+                <td class="id-col">CT-04</td>
+                <td><strong>Acesso sem token JWT</strong></td>
+                <td><span class="badge badge-orange">Segurança</span></td>
+                <td>Validar que rotas privadas da API retornam erro 401 Unauthorized se o usuário não logou.</td>
+              </tr>
+              <tr>
+                <td class="id-col">CT-05</td>
+                <td><strong>Cálculo do total do carrinho</strong></td>
+                <td><span class="badge badge-green">Regra de Negócio</span></td>
+                <td>Validar se o valor total da compra corresponde à soma dos produtos considerando o frete.</td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -843,6 +855,72 @@
               <div class="bug-field">
                 <strong>Resultado atual</strong>
                 <span>O personagem recebe dano, mas o HUD permanece visualmente inalterado.</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="bug-card">
+            <div class="bug-header">
+              <span class="bug-title">Checkout retorna erro 500 com carrinho vazio</span>
+              <span class="badge badge-red">Severidade: Alta</span>
+            </div>
+
+            <div class="bug-body">
+              <div class="bug-field">
+                <strong>Contexto</strong>
+                <span>API backend simulando um e-commerce (rota /api/checkout).</span>
+              </div>
+
+              <div class="bug-field">
+                <strong>Passos para reproduzir</strong>
+                <ol>
+                  <li>Autenticar na aplicação e obter o Bearer Token.</li>
+                  <li>Esvaziar todos os itens do carrinho de compras.</li>
+                  <li>Enviar requisição POST para a rota <code>/api/checkout</code> simulando finalização.</li>
+                </ol>
+              </div>
+
+              <div class="bug-field">
+                <strong>Resultado esperado</strong>
+                <span>A API deve retornar HTTP 400 (Bad Request) informando que o carrinho está vazio.</span>
+              </div>
+
+              <div class="bug-field">
+                <strong>Resultado atual</strong>
+                <span>Ocorre um HTTP 500 (Internal Server Error) devido à falha ao ler um array <code>null</code>.</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="bug-card">
+            <div class="bug-header">
+              <span class="bug-title">Texto sobrepondo botão em resoluções pequenas</span>
+              <span class="badge badge-blue">Severidade: Baixa</span>
+            </div>
+
+            <div class="bug-body">
+              <div class="bug-field">
+                <strong>Contexto</strong>
+                <span>Interface do simulador de delivery em dispositivos menores (Ex: iPhone SE, 320px).</span>
+              </div>
+
+              <div class="bug-field">
+                <strong>Passos para reproduzir</strong>
+                <ol>
+                  <li>Abrir o app na visualização mobile com largura de 320px.</li>
+                  <li>Adicionar itens ao pedido.</li>
+                  <li>Avançar até a tela de confirmação de pagamento longo.</li>
+                </ol>
+              </div>
+
+              <div class="bug-field">
+                <strong>Resultado esperado</strong>
+                <span>Os botões e o texto de valor devem reorganizar-se (wrap) ou diminuir a fonte para caber.</span>
+              </div>
+
+              <div class="bug-field">
+                <strong>Resultado atual</strong>
+                <span>O valor quebra a linha sem margens, encobrindo metade da área de clique do botão "Confirmar".</span>
               </div>
             </div>
           </article>
